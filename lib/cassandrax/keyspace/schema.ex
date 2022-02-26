@@ -244,7 +244,16 @@ defmodule Cassandrax.Keyspace.Schema do
     type = schema.__schema__(:type, field)
 
     case Ecto.Type.dump(type, value) do
-      {:ok, _dumped_value} ->
+      {:ok, dumped_value} ->
+        value =
+          cond do
+            match?({:parameterized, Ecto.Embedded, _}, type) ->
+              Map.new(dumped_value, fn {k, v} -> {to_string(k), v} end)
+
+            true ->
+              value
+          end
+
         case type_check(schema, remaining_changes) do
           {:ok, rest} -> {:ok, [value | rest]}
           other -> other
