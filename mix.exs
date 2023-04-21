@@ -1,7 +1,7 @@
 defmodule Cassandrax.MixProject do
   use Mix.Project
 
-  @version "0.0.5"
+  @version "0.1.0"
   @url "https://github.com/loopsocial/cassandrax"
   @maintainers ["Thiago Dias", "Doga Tuncay"]
 
@@ -18,7 +18,8 @@ defmodule Cassandrax.MixProject do
 
       # Hexpm
       package: package(),
-      description: "An Elixir Cassandra ORM built on top of Xandra driver.",
+      description:
+        "A Cassandra data mapping built on top of Ecto and query runner on top of Xandra.",
 
       # Docs
       name: "Cassandrax",
@@ -38,7 +39,7 @@ defmodule Cassandrax.MixProject do
   defp deps do
     [
       {:xandra, "~> 0.13"},
-      {:ecto, "~> 3.0"},
+      {:ecto, "~> 3.8"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false}
     ]
   end
